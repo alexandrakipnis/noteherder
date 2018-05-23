@@ -15,7 +15,7 @@ const NoteForm = (props) => {
             style={styles.button}
         >
           <i 
-            className="fa fa-trash-o" 
+            className="fas fa-trash-alt" 
             style={styles.i} 
         />
         </button>
