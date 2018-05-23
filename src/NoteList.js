@@ -4,9 +4,15 @@ class NoteList extends React.Component {
 
   render() {
     return (
-      <div className="NoteList" style={styles.NoteList}>
+      <div 
+        className="NoteList" 
+        style={styles.NoteList}
+      >
         <h3 style={styles.h3}>Notes</h3>
-        <ul id="notes" style={styles.notes}>
+        <ul 
+            id="notes" 
+            style={styles.notes}
+        >
         </ul>
       </div>
     );
