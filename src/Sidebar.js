@@ -6,7 +6,7 @@ import newHover from "./new-hover.png";
 
 class Sidebar extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       mouseHover: true 
     };
@@ -60,7 +60,7 @@ class Sidebar extends React.Component {
 
         <div 
             className="Signout" 
-            style={styles.signOut}
+            style={{...styles.signOut, ...styles.button}}
         >
           <button
             style={styles.button}

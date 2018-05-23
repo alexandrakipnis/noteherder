@@ -1,7 +1,13 @@
 import React from 'react'
 
 class NoteList extends React.Component {
-
+  constructor(props) {
+        super(props)
+        this.state = {
+            noteTitle: ['Title One', 'Title Two'],
+            noteBody: ['These are words for the first note', 'These are words for the second note']
+        };
+  }
   render() {
     return (
       <div 
@@ -13,6 +19,28 @@ class NoteList extends React.Component {
             id="notes" 
             style={styles.notes}
         >
+            <a className='active'>
+                {Object.keys(this.state.noteTitle).map(((value) => {
+                    return (
+                        <li style={styles.listOfNotes}>
+                            <div className='note'>
+                                <div 
+                                    className='note-title' 
+                                    style={styles.noteTitle}
+                                >
+                                    {this.state.noteTitle[value]}
+                                </div>
+                                <div 
+                                    className='note-body' 
+                                    style={styles.noteBody}
+                                >
+                                    {this.state.noteBody[value]}
+                                </div>                                
+                            </div>
+                        </li>
+                    )
+                }))}
+            </a>
         </ul>
       </div>
     );
@@ -43,7 +71,30 @@ const styles = {
       padding: "0",
       width: "100%",
       color: "#999"
-    }
+    },
+
+    listOfNotes: {
+        borderTop: '1px solid #eee',
+        margin: '0 2rem',
+        padding: '1rem 4px',
+    },
+
+    noteTitle: {
+        color: '#4a4a4a',
+        fontFamily: '"Fauna One"',
+        fontSize: '120%',
+        fontWeight: '400',
+        whiteSpace: 'nowrap',
+        overflowX: 'hidden',
+        oTextOverflow: 'ellipsis',
+        textOverflow: 'ellipsis',
+    },
+
+    noteBody: {
+        height: '54px',
+        overflow: 'hidden',
+        marginTop: '.5rem',
+    },
   };
   
   export default NoteList;
