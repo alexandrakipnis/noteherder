@@ -48,7 +48,7 @@ class Sidebar extends React.Component {
 
         <a>{button}</a>
 
-        <div className="SignOut" style={styles.SignOut}>
+        <div className="Signout" style={styles.signOut}>
           <button
             style={styles.button}
           >
@@ -95,11 +95,11 @@ const styles = {
       width: "4rem",
       transition: "opacity 0.25s ease-in-out"
     },
-    SignOut: {
+    signOut: {
       position: "absolute",
       bottom: "1rem"
     },
-    SignOutButton: {
+    signOutButton: {
       outline: "none"
     },
     i: {
