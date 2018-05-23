@@ -41,18 +41,34 @@ class Sidebar extends React.Component {
     }
 
     return (
-      <div className="Sidebar" style={styles.sidebar}>
-        <div className="logo" style={styles.logo}>
-          <img src={quill} alt="Noteherder" style={styles.logoImg} />
+      <div 
+        className="Sidebar" 
+        style={styles.sidebar}
+    >
+        <div 
+            className="logo" 
+            style={styles.logo}
+        >
+          <img 
+            src={quill} 
+            alt="Noteherder" 
+            style={styles.logoImg} 
+        />
         </div>
 
         <a>{button}</a>
 
-        <div className="Signout" style={styles.signOut}>
+        <div 
+            className="Signout" 
+            style={styles.signOut}
+        >
           <button
             style={styles.button}
           >
-            <i className="fa fa-sign-out" style={styles.i} />
+            <i 
+                className="fa fa-sign-out" 
+                style={styles.i} 
+            />
           </button>
         </div>
       </div>
