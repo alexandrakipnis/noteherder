@@ -4,10 +4,18 @@ class NoteList extends React.Component {
   constructor(props) {
         super(props)
         this.state = {
+            mouseHover: true,
             noteTitle: ['Title One', 'Title Two'],
             noteBody: ['These are words for the first note', 'These are words for the second note']
         };
   }
+
+  toggleButton(value) {
+    this.setState({
+      mouseHover: value
+    });
+  }
+
   render() {
     return (
       <div 
@@ -23,7 +31,11 @@ class NoteList extends React.Component {
                 {Object.keys(this.state.noteTitle).map(((value) => {
                     return (
                         <li style={styles.listOfNotes}>
-                            <div className='note'>
+                            <div 
+                                className='note'
+                                onMouseEnter={() => this.toggleButton(false)}
+                                onMouseLeave={() => this.toggleButton(true)}
+                            >
                                 <div 
                                     className='note-title' 
                                     style={styles.noteTitle}
@@ -94,6 +106,10 @@ const styles = {
         height: '54px',
         overflow: 'hidden',
         marginTop: '.5rem',
+    },
+
+    hover: {
+        backgroundColor: '#008bf8',
     },
   };
   
