@@ -10,28 +10,7 @@ class Main extends React.Component{
         super()
         this.state = {
             currentNote: this.blankNote(),
-            notes: [
-                {
-                    id: 1,
-                    title: 'Why I <3 JS',
-                    body: 'Because I love code, and JS is code',
-            
-                },
-            
-                {
-                    id: 2,
-                    title: 'Thoughts on breakfast',
-                    body: 'I love it',
-            
-                },
-            
-                {
-                    id: 3,
-                    title: 'Watching uncomfy Netflix scenes with your parents',
-                    body: 'Do not do it!!',
-            
-                },
-              ]
+            notes: []
             
         }
     }
@@ -52,6 +31,32 @@ class Main extends React.Component{
         this.setCurrentNote(this.blankNote())
     }
 
+    saveNote = (note) => {
+        const notes = [...this.state.notes]
+
+        if(!note.id){
+            //new note
+            note.id = Date.now()
+            notes.push(note)
+        }else{
+            //existing note
+            const i = notes.findIndex((currentNote) => currentNote.id === note.id)
+            notes[i] = note
+        }
+        this.setState({ notes })
+        this.setCurrentNote(note)
+    }
+
+    handleDelete = (note) => {
+      const notes = [...this.state.notes]
+      const i = notes.findIndex((currentNote) => currentNote.id === note.id)
+      notes.splice(i, 1)  
+      this.setState({ notes })
+      this.setCurrentNote(this.blankNote())
+    }
+
+
+
     render(){
         return (
             <div 
@@ -67,6 +72,8 @@ class Main extends React.Component{
                 />
                 <NoteForm 
                     currentNote={this.state.currentNote}
+                    saveNote={this.saveNote}
+                    handleDelete={this.handleDelete}
                 />
             </div>
         )
