@@ -16,7 +16,7 @@ const NoteForm = ({currentNote, saveNote, handleDelete}) => {
           type="button"
           onClick={() => handleDelete(currentNote)}
         >
-          <i className="far fa-trash-alt"></i>
+          <i className="fas fa-trash-alt"></i>
         </button>
       </div>
       <form>
@@ -24,7 +24,7 @@ const NoteForm = ({currentNote, saveNote, handleDelete}) => {
           <input
             type="text"
             name="title"
-            placeholder="Title your note"
+            placeholder="Title your note..."
             value={currentNote.title}
             onChange={handleChanges}
           />
@@ -32,6 +32,7 @@ const NoteForm = ({currentNote, saveNote, handleDelete}) => {
 
         <textarea 
           name="body"
+          placeholder="Start typing your note..."
           value={currentNote.body}
           onChange={handleChanges}
         >

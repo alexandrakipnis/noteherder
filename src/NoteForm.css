@@ -15,7 +15,16 @@
     border: none;
     background: none;
     padding: 0;
+    font-size: 2rem;
+    color: #999;
   }
+
+  .NoteForm placeholder
+
+  .NoteForm button:hover {
+    color: #008bf8;
+  }
+
   .NoteForm button[type=submit] {
     background-color: #008bf8;
     border-radius: 4px;
