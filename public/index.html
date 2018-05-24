@@ -36,6 +36,22 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    `<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>`
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCgUiH_q8qCo30qyj44j0OGeypehx5gIJg",
+        authDomain: "noteherder-9a2f8.firebaseapp.com",
+        databaseURL: "https://noteherder-9a2f8.firebaseio.com",
+        projectId: "noteherder-9a2f8",
+        storageBucket: "noteherder-9a2f8.appspot.com",
+        messagingSenderId: "561765059103"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
