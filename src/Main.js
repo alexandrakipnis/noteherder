@@ -9,18 +9,39 @@ class Main extends React.Component{
 
     constructor(){
         super()
+
+        //const storage = JSON.parse(localStorage.getItem('notes'))
+
         this.state = {
             currentNote: this.blankNote(),
-            notes: []
+            notes: []//storage
             
         }
 
-        //window.addEventListener("beforrunload", this.saveToLocalStorage)
+        this.getNotesInData()
+
     }
 
-    /*saveToLocalStorage = () => {
-        window.localStorage.setItem("state", JSON.stringify(this.state))
-    }*/
+    getNotesInData() {
+        const notesRef = firebase.database().ref('notes');
+        notesRef.on('value', (snapshot) => {
+            const notes = [...this.state.notes]
+
+                snapshot.forEach(function (childSnapshot) {
+                    let item = childSnapshot.val()
+
+                    let itemToPush = {
+                        id: childSnapshot.key,
+                        title: item.title,
+                        body: item.body,
+                    }
+
+                    notes.push(itemToPush)    
+                })
+
+                this.setState({ notes })
+        })
+    }
 
     setCurrentNote = (note) => {
         this.setState({ currentNote: note })
@@ -28,7 +49,7 @@ class Main extends React.Component{
 
     blankNote = (note) => {
         return {
-            id: null,
+            id: '',
             title: '',
             body: '',
         }
@@ -54,6 +75,10 @@ class Main extends React.Component{
                 title: note.title,
             })
         }
+
+        /*localStorage.setItem('notes', JSON.stringify(notes))
+        const storage = JSON.parse(localStorage.getItem('notes'))*/
+        //this.setState({ notes: storage })
         this.setState({ notes })
         this.setCurrentNote(note)
     }
@@ -62,13 +87,11 @@ class Main extends React.Component{
       const notes = [...this.state.notes]
       const i = notes.findIndex((currentNote) => currentNote.id === note.id)
       notes.splice(i, 1)  
+      
+      firebase.database().ref('notes/' + note.id).remove();
+      //localStorage.setItem('notes', JSON.stringify(notes))
       this.setState({ notes })
       this.setCurrentNote(this.blankNote())
-
-      firebase.database().ref('notes/' + note.id).remove({
-        body: note.body,
-        title: note.title,
-      })
 
     }
 
