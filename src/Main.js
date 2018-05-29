@@ -21,7 +21,7 @@ class Main extends React.Component{
     }
 
     componentWillMount() {
-        firebase.syncState(`${this.props.uid}`, {
+        firebase.syncState(`notes/${this.props.uid}`, {
             context: this, 
             state: 'notes',
             asArray: true,
