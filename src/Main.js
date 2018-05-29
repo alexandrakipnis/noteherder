@@ -5,6 +5,8 @@ import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 import firebase from './firebase'
 
+import './Main.css'
+
 class Main extends React.Component{
 
     constructor(){
@@ -19,7 +21,7 @@ class Main extends React.Component{
     }
 
     componentWillMount() {
-        firebase.syncState('notes', {
+        firebase.syncState(`${this.props.uid}`, {
             context: this, 
             state: 'notes',
             asArray: true,
@@ -75,7 +77,6 @@ class Main extends React.Component{
         return (
             <div 
                 className="Main" 
-                style={style}
             >
                 <Sidebar 
                     resetCurrentNote={this.resetCurrentNote}
@@ -95,11 +96,5 @@ class Main extends React.Component{
     }
 }
 
-const style = {
-    display: 'flex',
-    height: '100vh',
-    alignItems: 'stretch',
-    
-}
 
 export default Main

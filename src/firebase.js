@@ -11,6 +11,7 @@ var config = {
     storageBucket: "noteherder-9a2f8.appspot.com",
     messagingSenderId: "561765059103",
 }
+
 const app = firebase.initializeApp(config)
 const db = firebase.database(app)
 
