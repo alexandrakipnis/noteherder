@@ -16,6 +16,7 @@ const SignIn = () => {
                 <span className="title">Noteherder</span>
             </header>
             <main>
+                <div class="background-image"></div>
                 <h3>Hey, Nerd! You Like Notes?</h3>
                 <p>You never know when you'll need to write stuff down. In fact, you should probably be taking notes right now.</p>
                 <button 

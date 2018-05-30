@@ -14,7 +14,7 @@ class NoteForm extends React.Component {
   componentWillReceiveProps = (newProps) => {
     const newId = newProps.match.params.id
     const i = newProps.notes.findIndex(currentNote => currentNote.id.toString() === newId)
-    const note = newProps.notes[i]
+    const note = newProps.notes[i] || this.blankNote()
     if(note){
       this.setState({note})
     }
@@ -38,13 +38,13 @@ class NoteForm extends React.Component {
   }
 
   render(){
-    const {currentNote, handleDelete} = this.props
+    const {handleDelete} = this.props
     return (
       <div className="NoteForm">
         <div className="form-actions">
           <button 
             type="button"
-            onClick={() => handleDelete(currentNote)}
+            onClick={() => handleDelete(this.state.note)}
           >
             <i className="fas fa-trash-alt"></i>
           </button>
