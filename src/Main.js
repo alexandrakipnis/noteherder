@@ -90,7 +90,6 @@ class Main extends React.Component{
                 />
                 <NoteList 
                     notes={this.state.notes}
-                    setCurrentNote={this.setCurrentNote}
                 />
                 <Switch>
                     <Route 
