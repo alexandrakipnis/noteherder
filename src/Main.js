@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 import firebase from './firebase'
+import {Route, Switch} from 'react-router-dom'
 
 import './Main.css'
 
@@ -74,6 +75,11 @@ class Main extends React.Component{
 
 
     render(){
+        const formProps = {
+            currentNote: this.state.currentNote,
+            saveNote: this.saveNote,
+            handleDelete: this.handleDelete,
+        }
         return (
             <div 
                 className="Main" 
@@ -86,11 +92,26 @@ class Main extends React.Component{
                     notes={this.state.notes}
                     setCurrentNote={this.setCurrentNote}
                 />
-                <NoteForm 
-                    currentNote={this.state.currentNote}
-                    saveNote={this.saveNote}
-                    handleDelete={this.handleDelete}
-                />
+                <Switch>
+                    <Route 
+                        path="/notes/:id"
+                        render={navProps => (
+                            <NoteForm 
+                                {...formProps}
+                                {...navProps}
+                            />
+                        )}
+                    />
+
+                    <Route
+                        render={navProps => (
+                            <NoteForm 
+                                {...formProps}
+                                {...navProps}
+                            />
+                        )}
+                    />
+                </Switch>
             </div>
         )
     }
