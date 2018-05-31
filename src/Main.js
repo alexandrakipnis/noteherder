@@ -3,104 +3,91 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
-import firebase from './firebase'
-import {Route, Switch} from 'react-router-dom'
+import base from './firebase.js'
+import { Route, Switch } from 'react-router-dom'
 
-import './Main.css'
+class Main extends React.Component {
 
-class Main extends React.Component{
-
-    constructor(){
+    constructor() {
         super()
-
         this.state = {
-            currentNote: this.blankNote(),
-            notes: []
-            
+            notes: [],
         }
 
     }
 
     componentWillMount() {
-        firebase.syncState(`notes/${this.props.uid}`, {
-            context: this, 
+
+        base.syncState(`notes/${this.props.uid}`, {
+            context: this,
             state: 'notes',
             asArray: true,
         })
     }
 
-    setCurrentNote = (note) => {
-        this.setState({ currentNote: note })
-    }
-
-    blankNote = (note) => {
-        return {
-            id: '',
-            title: '',
-            body: '',
-        }
-    }
-
-    resetCurrentNote = (note) => {
-        this.setCurrentNote(this.blankNote())
-    }
-
     saveNote = (note) => {
         let shouldRedirect = false
+        const timestamp = Date.now()
+        note.updatedAt = timestamp
         const notes = [...this.state.notes]
-        if(!note.id){
-            //new note
-            note.id = Date.now()
-            notes.push(note)
-            shouldRedirect = true
-        }else{
-            //existing note
-            const i = notes.findIndex((currentNote) => currentNote.id === note.id)
-            notes[i] = note
+    
+        if (!note.id) {
+          // new note
+          note.id = timestamp
+          notes.push(note)
+          shouldRedirect = true
+        } else {
+          // existing note
+          const i = notes.findIndex(currentNote => currentNote.id === note.id)
+          notes[i] = note
         }
 
+        notes.sort((a, b) => {
+            return b.updatedAt - a.updatedAt
+        })
+    
         this.setState({ notes })
-
-        if(shouldRedirect){
-            this.props.history.push(`/notes/${note.id}`)
+    
+        if (shouldRedirect) {
+          this.props.history.push(`/notes/${note.id}`)
         }
     }
 
-    handleDelete = (currentNote) => {
-      const notes = [...this.state.notes]
-      const id = this.props.match.params.id
-      const i = notes.findIndex((note) => note.id === currentNote.id)
-      if(i > -1){
-        notes.splice(i, 1) 
-        this.setState({notes})
-        this.props.history.push('/notes')
-      } 
+    deleteNote = (note) => {
+        const notes = [...this.state.notes]
+        const i = notes.findIndex(currentNote => currentNote.id === note.id)
+        if(1 > -1){
+            notes.splice(i, 1)
+            this.setState({ notes })
+            this.props.history.push('/notes')
+        }
+
     }
 
 
 
-    render(){
+    render() {
+
         const formProps = {
-            currentNote: this.state.currentNote,
             saveNote: this.saveNote,
-            handleDelete: this.handleDelete,
+            deleteNote: this.deleteNote,
             notes: this.state.notes
         }
+
         return (
-            <div 
-                className="Main" 
-            >
-                <Sidebar 
+            <div className='Main' style={style} >
+                <Sidebar
                     signOut={this.props.signOut}
                 />
-                <NoteList 
+                <NoteList
                     notes={this.state.notes}
                 />
                 <Switch>
-                    <Route 
-                        path="/notes/:id"
-                        render={navProps => (
-                            <NoteForm 
+
+                    <Route
+                        path='/notes/:id'
+                        render={(navProps) => (
+                            <NoteForm
                                 {...formProps}
                                 {...navProps}
                             />
@@ -108,18 +95,24 @@ class Main extends React.Component{
                     />
 
                     <Route
-                        render={navProps => (
-                            <NoteForm 
+                        render={(navProps) => (
+                            <NoteForm
                                 {...formProps}
                                 {...navProps}
                             />
                         )}
                     />
+
                 </Switch>
             </div>
         )
     }
 }
 
+const style = {
+    display: 'flex',
+    height: '100vh',
+    alignItems: 'sretch',
+}
 
 export default Main

@@ -4,9 +4,9 @@ import { StyleSheet, css } from 'aphrodite'
 import quill from './quill.svg'
 import newIcon from './new.png'
 import newHover from './new-hover.png'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-const Sidebar = ({ resetCurrentNote, signOut }) => {
+const Sidebar = ({resetCurrentNote, signOut}) => {
   return (
     <nav className={css(styles.sidebar)}>
       <div className={css(styles.logo)}>
@@ -29,15 +29,14 @@ const Sidebar = ({ resetCurrentNote, signOut }) => {
         />
       </Link>
       <div className={css(styles.signOut)}>
-        <button 
+        <button
           className={css(styles.button)}
           onClick={signOut}
         >
-          <i 
+          <i
             className={`fas fa-sign-out-alt ${css(styles.buttonIcon)}`}
-            title="sign out"  
-        >
-        </i>
+            title="sign out"
+          ></i>
         </button>
       </div>
     </nav>
