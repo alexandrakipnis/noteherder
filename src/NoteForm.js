@@ -26,11 +26,14 @@ class NoteForm extends Component {
   }
 
   blankNote = () => {
+    let date = new Date()
+    date = date.toUTCString()
     return {
       id: null,
       title: '',
       body: '',
       updateAt: null,
+      timeStamp: date,
     }
   }
 

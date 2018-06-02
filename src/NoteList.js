@@ -3,7 +3,7 @@ import Note from './Note'
 
 import './NoteList.css'
 
-const NoteList = ({notes, setCurrentNote}) =>{
+const NoteList = ({notes, setCurrentNote}) => {
     
     return (
         <div className="NoteList">
